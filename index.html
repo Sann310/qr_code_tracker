@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Tracker</title>
-    <!-- Google Analytics tracking code -->
+    <!-- Google Analytics Tracking Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZT0N3G683"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-2ZT0N3G683');
 
-        // Function to read URL parameters
-        function getUrlParameter(param) {
-            let params = new URLSearchParams(window.location.search);
-            return params.get(param);
+        // Capture URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const url = urlParams.get('url');
+        const id = urlParams.get('id');
+
+        // Log the scan event in Google Analytics
+        if (id) {
+            gtag('event', 'QR_scan', {
+                'event_category': 'QR Tracking',
+                'event_label': id
+            });
         }
 
-        // Get 'url' parameter and redirect
-        window.onload = function() {
-            let redirectUrl = getUrlParameter('url');
-            if (redirectUrl) {
-                // Redirect after logging to Google Analytics
-                window.location.href = redirectUrl;
-            } else {
-                document.body.innerHTML = "<h1>Error: No URL to redirect to.</h1>";
-            }
-        };
+        // Redirect to the original URL after logging
+        if (url) {
+            window.location.href = url;
+        }
     </script>
 </head>
 <body>
-    <h1>Tracking your QR Code...</h1>
-    <p>If you're not redirected, please wait.</p>
+    <h1>QR Code Tracker</h1>
+    <p>Redirecting...</p>
 </body>
 </html>
