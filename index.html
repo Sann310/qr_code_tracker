@@ -3,49 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>QR Code Tracker</title>
-
-    <!-- Google Analytics -->
+    <!-- Google Analytics tracking code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZT0N3G683"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2ZT0N3G683');
 
-      gtag('config', 'G-2ZT0N3G683');
+        // Function to read URL parameters
+        function getUrlParameter(param) {
+            let params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        // Get 'url' parameter and redirect
+        window.onload = function() {
+            let redirectUrl = getUrlParameter('url');
+            if (redirectUrl) {
+                // Redirect after logging to Google Analytics
+                window.location.href = redirectUrl;
+            } else {
+                document.body.innerHTML = "<h1>Error: No URL to redirect to.</h1>";
+            }
+        };
     </script>
-
-    <!-- Styles -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        p {
-            color: #666;
-        }
-
-        .qr-code {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Welcome to Your QR Code Tracker</h1>
-    <p>This page tracks the QR code scans via Google Analytics. Every time this page is visited, it will be logged in your Google Analytics dashboard.</p>
-
-    <div class="qr-code">
-        <img src="qrcode_placeholder.png" alt="QR Code" width="200">
-        <p>Scan the QR code to access this page.</p>
-    </div>
+    <h1>Tracking your QR Code...</h1>
+    <p>If you're not redirected, please wait.</p>
 </body>
 </html>
