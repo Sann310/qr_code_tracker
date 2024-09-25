@@ -1,34 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>QR Code Tracker</title>
-  <!-- Google Analytics tracking code -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'YOUR_TRACKING_ID');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>QR Code Tracker</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZT0N3G683"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2ZT0N3G683');
+    </script>
+
+    <!-- Styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .qr-code {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>QR Code Tracker</h1>
-  <p>Redirecting...</p>
-  <script>
-    // Get the 'url' parameter from the query string
-    const params = new URLSearchParams(window.location.search);
-    const redirectUrl = params.get('url');
-    
-    if (redirectUrl) {
-      // Log the QR code scan event to Google Analytics
-      gtag('event', 'QR Code Scan', {
-        'event_category': 'QR Codes',
-        'event_label': redirectUrl,
-        'value': 1
-      });
-      
-      // Redirect the user to the actual URL
-      window.location.href = redirectUrl;
-    } else {
-      document.body.innerHTML = '<h2>No URL found!</h2>';
-    }
-  </script>
+    <h1>Welcome to Your QR Code Tracker</h1>
+    <p>This page tracks the QR code scans via Google Analytics. Every time this page is visited, it will be logged in your Google Analytics dashboard.</p>
+
+    <div class="qr-code">
+        <img src="qrcode_placeholder.png" alt="QR Code" width="200">
+        <p>Scan the QR code to access this page.</p>
+    </div>
 </body>
+</html>
