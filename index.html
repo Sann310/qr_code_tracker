@@ -9,17 +9,16 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-2ZT0N3G683'); // This is Google Analytics ID
+    gtag('config', 'G-2ZT0N3G683'); // Google Analytics ID
 
-    // Custom function to track the QR code scan as an event
-    function trackQRCode(qrData) {
+    function trackQRCode(qrData, uniqueID) {
       gtag('event', 'QR Code Scan', {
         'event_category': 'QR Code',
-        'event_label': qrData,  // Label this event with the scanned URL
-        'value': 1
+        'event_label': qrData,   // Label with the scanned URL
+        'event_action': uniqueID // Track each QR scan with its unique ID
       });
       // Redirect after logging the event
-      window.location.href = qrData;  // Redirect to the original URL
+      window.location.href = qrData;
     }
   </script>
 </head>
@@ -28,13 +27,13 @@
   <p>Redirecting...</p>
 
   <script>
-    // Get the redirect URL from the query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const qrData = urlParams.get('redirect');
+    const uniqueID = urlParams.get('id'); // Capture the unique ID
 
-    if (qrData) {
-      // Track the QR code scan and redirect
-      trackQRCode(qrData);
+    if (qrData && uniqueID) {
+      // Track the QR code scan with its unique ID
+      trackQRCode(qrData, uniqueID);
     }
   </script>
 </body>
