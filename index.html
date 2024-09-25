@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Tracker Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Tracker</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZT0N3G683"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2ZT0N3G683'); // This is Google Analytics ID
 
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZT0N3G683"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-2ZT0N3G683');  
-    </script>
-
-    <script>
-        // Function to get query parameters from the URL
-        function getQueryParam(param) {
-            let params = new URLSearchParams(window.location.search);
-            return params.get(param);
-        }
-
-        // When the page loads, this script will execute
-        window.onload = function() {
-            // Get the 'redirect' query parameter from the URL
-            let redirectUrl = getQueryParam('redirect');
-            
-            if (redirectUrl) {
-                // Decode the URL
-                redirectUrl = decodeURIComponent(redirectUrl);
-
-                // Log the redirection in the console for testing
-                console.log("Redirecting to: " + redirectUrl);
-
-                // Display a message to the user
-                document.getElementById('message').innerHTML = 'Redirecting to ' + redirectUrl;
-
-                // Redirect the user after 2 seconds
-                setTimeout(function() {
-                    window.location.href = redirectUrl;
-                }, 2000);
-            } else {
-                document.getElementById('message').innerHTML = 'No redirect URL found!';
-            }
-        };
-    </script>
+    // Custom function to track the QR code scan as an event
+    function trackQRCode(qrData) {
+      gtag('event', 'QR Code Scan', {
+        'event_category': 'QR Code',
+        'event_label': qrData,  // Label this event with the scanned URL
+        'value': 1
+      });
+      // Redirect after logging the event
+      window.location.href = qrData;  // Redirect to the original URL
+    }
+  </script>
 </head>
 <body>
-    <h1 id="message">QR Code Tracker Redirecting...</h1>
+  <h1>QR Code Tracker</h1>
+  <p>Redirecting...</p>
+
+  <script>
+    // Get the redirect URL from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const qrData = urlParams.get('redirect');
+
+    if (qrData) {
+      // Track the QR code scan and redirect
+      trackQRCode(qrData);
+    }
+  </script>
 </body>
 </html>
