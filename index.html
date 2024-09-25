@@ -9,3 +9,26 @@
     gtag('config', 'YOUR_TRACKING_ID');
   </script>
 </head>
+<body>
+  <h1>QR Code Tracker</h1>
+  <p>Redirecting...</p>
+  <script>
+    // Get the 'url' parameter from the query string
+    const params = new URLSearchParams(window.location.search);
+    const redirectUrl = params.get('url');
+    
+    if (redirectUrl) {
+      // Log the QR code scan event to Google Analytics
+      gtag('event', 'QR Code Scan', {
+        'event_category': 'QR Codes',
+        'event_label': redirectUrl,
+        'value': 1
+      });
+      
+      // Redirect the user to the actual URL
+      window.location.href = redirectUrl;
+    } else {
+      document.body.innerHTML = '<h2>No URL found!</h2>';
+    }
+  </script>
+</body>
